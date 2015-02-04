@@ -1,0 +1,27 @@
+body{
+    background-color: #c1b8f2
+}
+.textbutton {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.textbutton:hover{
+    text-decoration: underline
+}
+
+.vertical-off {
+    min-height: 40%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 40vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
+}
+
+.mpage{
+    color: #000000
+}
+.mpage:hover{
+    text-decoration: none;
+}
