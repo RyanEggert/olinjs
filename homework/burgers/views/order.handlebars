@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h1>Jessica's Burgers<small>{{ptitle}}</small></h1>
+</div>
+<form class="form-horizontal">
+  <fieldset>
+
+    <!-- Form Name -->
+    <legend>Build your burger!</legend>
+
+    <!-- Multiple Checkboxes -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="toppings">Choose toppings</label>
+      <div class="col-md-4">
+        {{#each ingredient}}
+        <div class="checkbox">
+        <label for={{this.name}}>
+        <input name="toppings" id={{this.name}} value={{this.price}} type="checkbox">
+            {{this.name}}, ${{this.price}}
+          </label>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="orderbutton"></label>
+      <div class="col-md-4">
+        <button id="orderbutton" name="orderbutton" class="btn btn-primary">Place Order!</button>
+      </div>
+    </div>
+
+  </fieldset>
+</form>
