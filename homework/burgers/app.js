@@ -9,6 +9,7 @@ var mongoose = require("mongoose");
 
 // internal requirements
 var index = require("./routes/index");
+// var postroutes = require("./routes/postr")
 
 // app creation & configuration
 var app = express();
@@ -16,12 +17,16 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 var mongoURI = process.env.MONGOURI || "mongodb://localhost/test";
 
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.engine("handlebars", exphbs({
+    defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -29,10 +34,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", index.home);
 app.get("/ingredients", index.inventory);
 app.get("/order", index.placeorder);
-// app.get("/kitchen", index.vieworders);
+app.get("/kitchen", index.vieworders);
 
+app.post("/newItem", index.additemPOST);
+app.post("/updateItem", index.updateitemPOST);
 // connections
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {
-console.log("Application running on port:", PORT);
-})
+    console.log("Application running on port:", PORT);
+});

@@ -1,5 +1,5 @@
 <h1><a href="/">Jessica's Burgers</h1></a>
-<form class="form-horizontal">
+<form class="form-horizontal" id = 'inventory'>
   <fieldset>
 
     <!-- Form Name -->
@@ -11,12 +11,12 @@
       <label class="col-md-4 control-label" for="appendedtext">{{this.name}}</label>
       <div class="col-md-4" id="inventorylist">
         <div class="input-group">
-          <input id="quantity{{this.ObjectId}}" class="form-control" placeholder={{this.quantity}} type="text">
-          <span class="input-group-btn"><button class="btn btn-default" type="button">Update Quantity</button></span>
-          <input id="appendedtext" class="form-control" placeholder=${{this.price}} type="text">
-          <span class="input-group-btn"><button class="btn btn-default" type="button">Update Price</button></span>
+          <input id={{this._id}} class="form-control quantity" placeholder={{this.quantity}} type="text">
+          <span class="input-group-btn"><button class="btn btn-default quantity" id={{this._id}} type="button">Update Quantity</button></span>
+          <input id={{this._id}} class="form-control price" placeholder=${{this.price}} type="text">
+          <span class="input-group-btn"><button class="btn btn-default price" id={{this._id}} type="button">Update Price</button></span>
         </div>
-        <p class="help-block"><button class="textbutton">Out of Stock?</button></p>
+        <p class="help-block"><button id={{this._id}} class="textbutton">Out of Stock?</button></p>
       </div>
     </div>
     {{/each}}
@@ -41,4 +41,6 @@
     </div>
   </fieldset>
 </form>
-<!-- Inputs: for each ingredient: name, price, quantity -->
+
+<!-- input and button ids are mongo object ids -->
+<!-- "quantity" and "price" are  -->
