@@ -27,7 +27,7 @@ var ingredients = function(req, res) {
 
 
 var order = function(req, res) {
-    Ingredient.find()
+    Ingredient.find({'quantity':{$gte:0}})
         .sort({
             price: -1
         })
@@ -35,6 +35,7 @@ var order = function(req, res) {
             if (err) {
                 res.status(500).send("Something broke!");
             } else {
+
                 res.render("order", {
                     'ingredient': ingredients
                 });
@@ -93,6 +94,13 @@ var updateitem = function(req, res) {
 };
 
 
+var placeorder = function(req, res) {
+    var indata = req.body;
+    console.log(indata);
+    var orderinfo = indata.items.split(/\&|\=/);
+    console.log(orderinfo);
+    res.status(200).send('OK');
+};
 
 
 module.exports.home = home;
@@ -101,3 +109,4 @@ module.exports.inventory = ingredients;
 module.exports.vieworders = kitchen;
 module.exports.additemPOST = additem;
 module.exports.updateitemPOST = updateitem;
+module.exports.placeorderPOST = placeorder;

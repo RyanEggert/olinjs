@@ -38,6 +38,8 @@ app.get("/kitchen", index.vieworders);
 
 app.post("/newItem", index.additemPOST);
 app.post("/updateItem", index.updateitemPOST);
+app.post("/placeOrder", index.placeorderPOST);
+
 // connections
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {

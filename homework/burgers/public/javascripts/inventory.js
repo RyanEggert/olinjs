@@ -26,11 +26,11 @@ var onUpdateSuccess = function(data, status) {
   $(findvar).val('');
   if (data.tochange === 'quantity') {
     $(findvar).attr('placeholder', data.newval);
-  } else{
-    $(findvar).attr('placeholder', '$'+ data.newval);
+  } else {
+    $(findvar).attr('placeholder', '$' + data.newval);
   }
 
- };
+};
 
 var onError = function(data, status) {
   console.log("status", status);
@@ -41,8 +41,8 @@ var onError = function(data, status) {
 $addbtn.click(function(event) {
   event.preventDefault();
   var newname = $nnamein.val();
-  var newprice = $npricein.val();
-  var newquan = $nquanin.val();
+  var newprice = $npricein.val().toFixed(2); // Prices should have two decimal points
+  var newquan = $nquanin.val().toFixed(0);  // Quantities should be whole numberss
   $.post("newItem", {
       name: newname,
       price: newprice,
@@ -83,11 +83,11 @@ $updatebuttons.click(function(event) {
 $outofstockbuttons.click(function(event) {
   event.preventDefault();
   itemid = $(this).attr('id'); //get item id to update price/quantity for
-    $.post("updateItem", {
-        item: itemid,
-        tochange: 'quantity',
-        newval: 0
-      })
-      .done(onUpdateSuccess)
-      .error(onError);
+  $.post("updateItem", {
+      item: itemid,
+      tochange: 'quantity',
+      newval: 0
+    })
+    .done(onUpdateSuccess)
+    .error(onError);
 });

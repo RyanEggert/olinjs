@@ -4,15 +4,17 @@
 
     <!-- Form Name -->
     <legend>Build your burger!</legend>
+    <legend>Order total: $<span class='orderprice'>0.00</span></legend>
 
     <!-- Multiple Checkboxes -->
+    <div class="ordermain">
     <div class="form-group">
       <label class="col-md-4 control-label" for="toppings">Choose toppings</label>
       <div class="col-md-4">
         {{#each ingredient}}
         <div class="checkbox">
         <label for={{this.name}}>
-        <input name="toppings" id={{this.name}} value={{this.price}} type="checkbox">
+        <input name={{this.name}} id={{this.quantity}} value={{this.price}} type="checkbox">
             {{this.name}}, ${{this.price}}
           </label>
         </div>
@@ -27,7 +29,8 @@
         <button id="orderbutton" name="orderbutton" class="btn btn-primary">Place Order!</button>
       </div>
     </div>
+    </div>
 
   </fieldset>
 </form>
-5
+
