@@ -11,6 +11,7 @@ var $outofstockbuttons = $("button.textbutton");
 
 var onNewSuccess = function(data, status) {
   // add new item to list on page with HTML
+  //could I have returned a server-filled-in handlebars partial?
   var $newitemhtml = "<div class='form-group'><label class='col-md-4 control-label' for='appendedtext'>" + data.name + " </label><div class='col-md-4' id='inventorylist'><div class='input-group'> <input id=" + data.id + "  class='form-control quantity' placeholder=" + data.quantity + "  type='text'> <span class='input-group-btn'><button class='btn btn-default quantity' id=" + data.id + " disabled type='button'>Update Quantity</button></span> <input id=" + data.id + "  class='form-control price' placeholder=$" + data.price + "  type='text'> <span class='input-group-btn'><button class='btn btn-default price' id=" + data.id + " disabled type='button'>Update Price</button></span> </div> <p class='help-block'><button id=" + data.id + " disabled class='textbutton'>Out of Stock?</button></p> </div> </div>";
   $($addnewf).prepend($newitemhtml);
   // increment indicator badge in top left corner
@@ -41,12 +42,12 @@ var onError = function(data, status) {
 $addbtn.click(function(event) {
   event.preventDefault();
   var newname = $nnamein.val();
-  var newprice = $npricein.val().toFixed(2); // Prices should have two decimal points
-  var newquan = $nquanin.val().toFixed(0);  // Quantities should be whole numberss
+  var newprice = $npricein.val();
+  var newquan = $nquanin.val();
   $.post("newItem", {
       name: newname,
-      price: newprice,
-      quantity: newquan
+      price: Number(newprice).toFixed(2),  // Prices should have two decimal points
+      quantity: Number(newquan).toFixed(0) // Quantities should be whole numbers
     })
     .done(onNewSuccess)
     .error(onError);

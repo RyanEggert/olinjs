@@ -1,34 +1,27 @@
-<div class="page-header">
-  <h1>Jessica's Burgers<small>{{ptitle}}</small></h1>
+<h1><a href="/">Jessica's Burgers</h1></a>
+<div>
+  <!-- Page Name -->
+  <legend>Open Orders</legend>
+
+  <!-- Open Orders -->
+  <div>
+    <label class="col-md-4" for="toppings">Open Orders</label>
+    <div class="col-md-4">
+      {{#each order}}
+      <div>
+        <label for=something>
+        <h4 class="orderhead">Order #{{@index}}: <button id="this._id" class="btn btn-danger btn-small cancelbut">Cancel Order</button></h4>
+         <p>Placed at {{this.date}}</p>
+          <p><b>Toppings</b></p>
+          <ul>
+            {{#each this.toppings}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </label>
+      </div>
+      {{/each}}
+    </div>
+  </div>
 </div>
-<form class="form-horizontal">
-  <fieldset>
-
-    <!-- Form Name -->
-    <legend>Build your burger!</legend>
-
-    <!-- Multiple Checkboxes -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="toppings">Choose toppings</label>
-      <div class="col-md-4">
-        {{#each ingredient}}
-        <div class="checkbox">
-        <label for={{this.name}}>
-        <input name="toppings" id={{this.name}} value={{this.price}} type="checkbox">
-            {{this.name}}, ${{this.price}}
-          </label>
-        </div>
-        {{/each}}
-      </div>
-    </div>
-
-    <!-- Button -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="orderbutton"></label>
-      <div class="col-md-4">
-        <button id="orderbutton" name="orderbutton" class="btn btn-primary">Place Order!</button>
-      </div>
-    </div>
-
-  </fieldset>
-</form>
+<!-- input list of orders -->

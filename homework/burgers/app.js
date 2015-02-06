@@ -38,8 +38,8 @@ app.get("/kitchen", index.vieworders);
 
 app.post("/newItem", index.additemPOST);
 app.post("/updateItem", index.updateitemPOST);
-app.post("/placeOrder", index.placeorderPOST);
-
+app.post("/placeOrder", index.placeorderPOST);   // updates inventory based on order
+app.post("/placeOrder", index.placeorderPOST2);  // places order in database
 // connections
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {

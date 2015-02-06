@@ -1,6 +1,9 @@
+
+
 body{
-    background-color: #c1b8f2
-}
+    background-color: #c1b8f2;
+    overflow-x:hidden;
+ }
 .textbutton {
     background:none;
     border:none;
@@ -24,4 +27,8 @@ body{
 }
 .mpage:hover{
     text-decoration: none;
+}
+
+ul{
+    list-style: circle;
 }

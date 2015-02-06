@@ -14,8 +14,7 @@ models.ingredient = mongoose.model("Ingredient", ingredientSchema);
 // orders
 
 var orderSchema = mongoose.Schema({
-    customername: String,
-    toppings: [ingredientSchema],
+    toppings: [String], // We check to make sure the ingredient name is in our database in decrinvent() in index.js. No need to use [ingredientSchema] here.
     date: {
         type: Date,
         default: Date.now

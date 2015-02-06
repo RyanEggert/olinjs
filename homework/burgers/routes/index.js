@@ -18,8 +18,7 @@ var ingredients = function(req, res) {
                 res.status(500).send("Something broke!");
             } else {
                 res.render("inventory", {
-                    'ingredient': ingredients,
-                    'ptitle': 'Inventory List'
+                    'ingredient': ingredients
                 });
             }
         });
@@ -27,7 +26,11 @@ var ingredients = function(req, res) {
 
 
 var order = function(req, res) {
-    Ingredient.find({'quantity':{$gte:0}})
+    Ingredient.find({
+            'quantity': {
+                $gte: 0
+            }
+        })
         .sort({
             price: -1
         })
@@ -44,7 +47,19 @@ var order = function(req, res) {
 };
 
 var kitchen = function(req, res) {
-    res.render("kitchen");
+    Order.find({})
+        .sort({
+            date: -1
+        })
+        .exec(function(err, orders) {
+            if (err) {
+                res.status(500).send("Something broke!");
+            } else {
+                res.render("kitchen", {
+                    'order': orders
+                });
+            }
+        });
 };
 
 var additem = function(req, res) {
@@ -94,12 +109,59 @@ var updateitem = function(req, res) {
 };
 
 
-var placeorder = function(req, res) {
+var decrinvent = function(req, res, next) {
     var indata = req.body;
-    console.log(indata);
     var orderinfo = indata.items.split(/\&|\=/);
     console.log(orderinfo);
-    res.status(200).send('OK');
+    var names = [];
+    for (var i = orderinfo.length - 2; i >= 0; i -= 2) {
+        names.push(orderinfo[i]);
+    }
+    console.log(names);
+    // Update inventory
+    Ingredient.update({
+        'name': {
+            $in: names // for each ordered item, ...
+        }
+    }, {
+        '$inc': {
+            'quantity': -1 // decrement its quantity
+        }
+    }, {
+        'multi': true // yes, decrement each ordered item
+    }, function(err, ingredients) {
+        if (err) {
+            res.status(500).send("Error saving ingredients");
+            console.log(err);
+        } else {
+            next(); // Success! Now go add order to db
+        }
+    });
+};
+
+var placeorder = function(req, res) {
+    var indata = req.body;
+    var orderinfo = indata.items.split(/\&|\=/);
+    console.log(orderinfo);
+    var names = [];
+    for (var i = orderinfo.length - 2; i >= 0; i -= 2) {
+        names.push(orderinfo[i]);
+    }
+    console.log(names);
+    // Update inventory
+    neworder = {
+        'toppings': names
+    };
+    var newOrder = new Order(neworder);
+    newOrder.save(function(err, neword) {
+            if (err) {
+                res.status(500).send('Error saving order.');
+            } else {
+                res.send(neword);
+            }
+        }
+
+    );
 };
 
 
@@ -109,4 +171,5 @@ module.exports.inventory = ingredients;
 module.exports.vieworders = kitchen;
 module.exports.additemPOST = additem;
 module.exports.updateitemPOST = updateitem;
-module.exports.placeorderPOST = placeorder;
+module.exports.placeorderPOST = decrinvent;
+module.exports.placeorderPOST2 = placeorder;

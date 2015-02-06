@@ -1,13 +1,14 @@
 var $orderprice = $(".orderprice");
 var $orderbutton = $("button#orderbutton");
 
-$("input#0").attr("disabled", true);
+
+
 var onOrder = function(data, status) {
     // clear checkboxes
     $("input[type=checkbox]").prop('checked', false);
     // remove checkboxes & labels
     $("div.form-group").hide();
-    //replace with confirmation
+    //replace with confirmation message
     $("div.ordermain").html("<h2><a href='/order'>Order Confirmed!</a><\h2>");
 };
 
@@ -29,18 +30,18 @@ $("input[type=checkbox]").on("click", function(event) {
 
 });
 
-//decrement server quantities by one
-$(orderbutton).on("click", function(event) {
+// send items and price to server
+$orderbutton.on("click", function(event) {
     event.preventDefault();
     var sendprice = $orderprice.html(); // price of order
     var items = $("input:checked").serialize();
     console.log(items);
     $.post("placeOrder", {
             items: items,
-            price: sendprice,
+            price: sendprice, // We do not currently use the price on the server. Maybe in the future. Could be used for validation?
         })
         .done(onOrder)
         .error(onError);
 });
-//remove all boxes
-//addmessage
+
+$("input.quant0").attr("disabled", true); // disable boxes of out-of-stock ingredients
