@@ -164,6 +164,24 @@ var placeorder = function(req, res) {
     );
 };
 
+var deletecompletedorder = function(req, res) {
+    var orderinfo = req.body;
+    console.log('moose');
+    console.log(orderinfo.orderid);
+    Order.findOneAndRemove({
+            '_id': orderinfo.orderid
+        },
+        function(err, data) {
+            if (err) {
+                res.status(500).send("Something broke!");
+            } else {
+                console.log(data);
+                res.send(orderinfo);
+            }
+        });
+
+};
+
 
 module.exports.home = home;
 module.exports.placeorder = order;
@@ -173,3 +191,4 @@ module.exports.additemPOST = additem;
 module.exports.updateitemPOST = updateitem;
 module.exports.placeorderPOST = decrinvent;
 module.exports.placeorderPOST2 = placeorder;
+module.exports.completedorderPOST = deletecompletedorder;

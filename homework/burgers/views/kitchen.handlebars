@@ -8,9 +8,8 @@
     <label class="col-md-4" for="toppings">Open Orders</label>
     <div class="col-md-4">
       {{#each order}}
-      <div>
-        <label for=something>
-        <h4 class="orderhead">Order #{{@index}}: <button id="this._id" class="btn btn-danger btn-small cancelbut">Cancel Order</button></h4>
+      <div id={{this._id}}>
+        <h4>Order #<span class="orderindex">{{@index}}</span>:<button id={{this._id}} class="btn btn-danger btn-small cancelbut">Completed</button></h4>
          <p>Placed at {{this.date}}</p>
           <p><b>Toppings</b></p>
           <ul>
@@ -18,7 +17,6 @@
             <li>{{this}}</li>
             {{/each}}
           </ul>
-        </label>
       </div>
       {{/each}}
     </div>

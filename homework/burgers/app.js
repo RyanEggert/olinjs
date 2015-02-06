@@ -40,6 +40,9 @@ app.post("/newItem", index.additemPOST);
 app.post("/updateItem", index.updateitemPOST);
 app.post("/placeOrder", index.placeorderPOST);   // updates inventory based on order
 app.post("/placeOrder", index.placeorderPOST2);  // places order in database
+app.post("/completedOrder", index.completedorderPOST);  // places order in database
+
+
 // connections
 mongoose.connect(mongoURI);
 app.listen(PORT, function() {
