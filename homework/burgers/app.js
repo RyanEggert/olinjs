@@ -9,7 +9,6 @@ var mongoose = require("mongoose");
 
 // internal requirements
 var index = require("./routes/index");
-// var postroutes = require("./routes/postr")
 
 // app creation & configuration
 var app = express();
@@ -41,6 +40,7 @@ app.post("/updateItem", index.updateitemPOST);
 app.post("/placeOrder", index.placeorderPOST);   // updates inventory based on order
 app.post("/placeOrder", index.placeorderPOST2);  // places order in database
 app.post("/completedOrder", index.completedorderPOST);  // places order in database
+
 
 
 // connections

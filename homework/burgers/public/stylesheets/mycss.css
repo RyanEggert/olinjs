@@ -1,7 +1,7 @@
 
 
 body{
-    background-color: #c1b8f2;
+    background-color: #d3e9f5;
     overflow-x:hidden;
  }
 .textbutton {
@@ -10,13 +10,12 @@ body{
     margin:0;
     padding:0;
 }
-.textbutton:hover{
+.textbutton:hover:not([disabled]){
     text-decoration: underline
 }
 
 .vertical-off {
-    min-height: 40%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 40vh; /* These two lines are counted as one :-)       */
+    min-height: 40vh;
 
     display: flex;
     align-items: center;
@@ -31,4 +30,22 @@ body{
 
 ul{
     list-style: circle;
+}
+
+input.form-control{
+    text-align: right;
+}
+
+label.warning{
+    color: #CC0000;
+}
+
+div.sectionwrapper{
+    overflow-y:scroll;
+    height:600px;
+    overflow-x: hidden;
+}
+
+div.kitchenwrapper{
+    height:800px;
 }
