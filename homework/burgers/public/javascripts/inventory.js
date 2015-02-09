@@ -56,11 +56,7 @@ var onOutofStock = function (data, status) {
   // After updating name or price or listing as out-of stock, run this fxn.
   var findvar = "input#" + data.item + ".form-control." + data.tochange;
   $(findvar).val('');
-  if (data.tochange === 'name') {
-    $(findvar).attr('placeholder', data.newval); // Names don't need prepended characters
-  } else {
-    $(findvar).attr('placeholder', '$' + data.newval); // Prices need prepended $-signs
-  }
+  $(findvar).attr('placeholder', data.newval);
   outofstockcolor();
 };
 var onError = function (data, status) {

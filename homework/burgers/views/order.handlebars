@@ -8,28 +8,28 @@
 
     <!-- Multiple Checkboxes -->
     <div class="ordermain">
-    <label class="col-md-4 control-label" for="toppings">Choose toppings</label>
-    <div class="form-group sectionwrapper">
+      <label class="col-md-4 control-label" for="toppings">Choose toppings</label>
+      <div class="form-group sectionwrapper">
 
-      <div class="col-md-4">
-        {{#each ingredient}}
-        <div class="checkbox">
-        <label for={{this.name}}>
-        <input name={{this.name}} class=quant{{this.quantity}} value={{this.price}} type="checkbox">
-            {{this.name}}, ${{this.price}}
-          </label>
+        <div class="col-md-4">
+          {{#each ingredient}}
+          <div class="checkbox">
+            <label for={{this.name}}>
+              <input name={{this.name}} class=quant{{this.quantity}} value={{this.price}} type="checkbox">
+              {{this.name}}, ${{this.price}}
+            </label>
+          </div>
+          {{/each}}
         </div>
-        {{/each}}
       </div>
-    </div>
 
-    <!-- Button -->
-    <div class="form-group">
-      <label class="col-md-4 control-label" for="orderbutton"></label>
-      <div class="col-md-4">
-        <button id="orderbutton" name="orderbutton" class="btn btn-primary">Place Order!</button>
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="orderbutton"></label>
+        <div class="col-md-4">
+          <button id="orderbutton" name="orderbutton" class="btn btn-primary">Place Order!</button>
+        </div>
       </div>
-    </div>
     </div>
 
   </fieldset>

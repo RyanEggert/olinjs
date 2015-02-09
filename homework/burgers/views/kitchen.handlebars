@@ -10,13 +10,13 @@
       {{#each order}}
       <div id={{this._id}}>
         <h4>Order #<span class="orderindex">{{@index}}</span>:<button id={{this._id}} class="btn btn-danger btn-small cancelbut">Completed</button></h4>
-         <p>Placed at {{this.date}}</p>
-          <p><b>Toppings</b></p>
-          <ul>
-            {{#each this.toppings}}
-            <li>{{this}}</li>
-            {{/each}}
-          </ul>
+        <p>Placed at {{this.date}}</p>
+        <p><b>Toppings</b></p>
+        <ul>
+          {{#each this.toppings}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
       </div>
       {{/each}}
     </div>
