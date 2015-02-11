@@ -3,16 +3,16 @@ var models = require(path.join(__dirname, "../models/restaurantModels"));
 var Ingredient = models.ingredient;
 var Order = models.order;
 
-var home = function (req, res) {
+var home = function(req, res) {
   res.render("home");
 };
 
-var ingredients = function (req, res) {
+var ingredients = function(req, res) {
   Ingredient.find()
     .sort({
       price: -1
     })
-    .exec(function (err, ingredients) {
+    .exec(function(err, ingredients) {
       if (err) {
         res.status(500).send("Something broke!");
       } else {
@@ -23,7 +23,7 @@ var ingredients = function (req, res) {
     });
 };
 
-var order = function (req, res) {
+var order = function(req, res) {
   Ingredient.find({
       'quantity': {
         $gte: 0
@@ -32,7 +32,7 @@ var order = function (req, res) {
     .sort({
       price: -1
     })
-    .exec(function (err, ingredients) {
+    .exec(function(err, ingredients) {
       if (err) {
         res.status(500).send("Something broke!");
       } else {
@@ -44,12 +44,12 @@ var order = function (req, res) {
     });
 };
 
-var kitchen = function (req, res) {
+var kitchen = function(req, res) {
   Order.find({})
     .sort({
       date: -1
     })
-    .exec(function (err, orders) {
+    .exec(function(err, orders) {
       if (err) {
         res.status(500).send("Something broke!");
       } else {
@@ -60,10 +60,10 @@ var kitchen = function (req, res) {
     });
 };
 
-var additem = function (req, res) {
+var additem = function(req, res) {
   var newitem = req.body;
   var newIngredient = new Ingredient(newitem);
-  newIngredient.save(function (err, newingred) {
+  newIngredient.save(function(err, newingred) {
     if (err) {
       res.status(500).send('Something broke!');
     } else {
@@ -73,7 +73,7 @@ var additem = function (req, res) {
   });
 };
 
-var updateitem = function (req, res) {
+var updateitem = function(req, res) {
   // updates either item name, quanity, or price
   var updateinfo = req.body;
   // I wish dynamic attributes names were possible.
@@ -84,7 +84,7 @@ var updateitem = function (req, res) {
       }, {
         name: updateinfo.newval
       },
-      function (err, data) {
+      function(err, data) {
         if (err) {
           res.status(500).send("Something broke!");
         } else {
@@ -97,7 +97,7 @@ var updateitem = function (req, res) {
       }, {
         quantity: updateinfo.newval
       },
-      function (err, data) {
+      function(err, data) {
         if (err) {
           res.status(500).send("Something broke!");
         } else {
@@ -111,7 +111,7 @@ var updateitem = function (req, res) {
       }, {
         price: updateinfo.newval
       },
-      function (err, data) {
+      function(err, data) {
         if (err) {
           res.status(500).send("Something broke!");
         } else {
@@ -123,7 +123,7 @@ var updateitem = function (req, res) {
 
 };
 
-var decrinvent = function (req, res, next) {
+var decrinvent = function(req, res, next) {
   var indata = req.body;
   var orderinfo = indata.items.split(/\&|\=/);
   var names = [];
@@ -141,7 +141,7 @@ var decrinvent = function (req, res, next) {
     }
   }, {
     'multi': true // yes, decrement each ordered item
-  }, function (err, ingredients) {
+  }, function(err, ingredients) {
     if (err) {
       res.status(500).send("Error saving ingredients");
       console.log(err);
@@ -151,7 +151,7 @@ var decrinvent = function (req, res, next) {
   });
 };
 
-var placeorder = function (req, res) {
+var placeorder = function(req, res) {
   var indata = req.body;
   var orderinfo = indata.items.split(/\&|\=/);
   var names = [];
@@ -163,7 +163,7 @@ var placeorder = function (req, res) {
     'toppings': names
   };
   var newOrder = new Order(neworder);
-  newOrder.save(function (err, neword) {
+  newOrder.save(function(err, neword) {
       if (err) {
         res.status(500).send('Error saving order.');
       } else {
@@ -174,12 +174,12 @@ var placeorder = function (req, res) {
   );
 };
 
-var deletecompletedorder = function (req, res) {
+var deletecompletedorder = function(req, res) {
   var orderinfo = req.body;
   Order.findOneAndRemove({
       '_id': orderinfo.orderid
     },
-    function (err, data) {
+    function(err, data) {
       if (err) {
         res.status(500).send("Something broke!");
       } else {

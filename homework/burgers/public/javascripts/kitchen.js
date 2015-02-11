@@ -1,5 +1,6 @@
 var $ordertitles = $("span.orderindex");
 var $completedbuttons = $("button.cancelbut");
+var $orderingredients = $("li");
 
 var onCompletedSuccess = function (data, status) {
   // Remove order
@@ -27,4 +28,8 @@ $completedbuttons.click(function (event) {
     })
     .done(onCompletedSuccess)
     .error(onError);
+});
+
+$orderingredients.each(function(index) {
+  $(this).html($(this).html().replace('+', ' '));
 });

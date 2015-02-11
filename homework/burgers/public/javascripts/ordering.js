@@ -1,7 +1,7 @@
 var $orderprice = $(".orderprice");
 var $orderbutton = $("button#orderbutton");
 
-var onOrder = function (data, status) {
+var onOrder = function(data, status) {
   // clear checkboxes
   $("input[type=checkbox]").prop('checked', false);
   // remove checkboxes & labels
@@ -10,16 +10,16 @@ var onOrder = function (data, status) {
   $("div.ordermain").html("<h2><a href='/order'>Order Confirmed!</a><\h2>");
 };
 
-var onError = function (data, status) {
+var onError = function(data, status) {
   console.log("status", status);
   console.log("error", data);
 };
 
 // sum and update the order price when checkbox is (un)checked
-$("input[type=checkbox]").on("click", function (event) {
-  $orderprice.html(function () {
+$("input[type=checkbox]").on("click", function(event) {
+  $orderprice.html(function() {
     var cusum = 0;
-    $("input:checked").each(function (index) {
+    $("input:checked").each(function(index) {
       cusum += Number($(this).val());
     });
     return cusum.toFixed(2);
@@ -28,7 +28,7 @@ $("input[type=checkbox]").on("click", function (event) {
 });
 
 // send items and price to server
-$orderbutton.on("click", function (event) {
+$orderbutton.on("click", function(event) {
   event.preventDefault();
   var sendprice = $orderprice.html(); // price of order
   var items = $("input:checked").serialize();
