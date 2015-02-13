@@ -56,6 +56,32 @@ Now running the tests should tell us that 1 test is passing! Let's take a look a
 
 This is all great for synchronous testing, but how do we deal with asynchronicity? We need some way to tell mocha to wait for our callbacks to run and assertions in them to fire before it finishes testing. We can do that in our call to `it` when setting up our tests. The second argument to `it` is a function, and that function can have 0 or 1 arguments. In the 0 argument case, it does synchronous tests like above. In the 1 argument case, however, your `it` function receives as an argument another function, idiomatically called `done`. Now, mocha will wait until `done` is called before it proceeds with more testing, allowing you to call `done` after running assertions in a callback to run async tests. Uncomment lines 15-21 and you can see this in action. Running our tests now shows 2 passing, one of which takes about a second, showing that our async test is working. Async tests aren't that complicated to do in mocha, but they are a little dangerous. If `done` never gets called for some reason (like an error in your callback), mocha will not know to stop waiting for it, and your tests would hang. To prevent hanging, mocha has a default timeout of 2 seconds on async tests, after which they will fail, which we can see if we change the `1000` in line 20 to `3000`. You can change this timeout manually by setting `this.timeout` to a value in ms inside of your describe function. 
 
+Now let's uncomment the entire file and run our tests, which should leave us with 3 tests passing within 2 test suites. This is a quick, proof-of-concept test on our index route. If you look in the route, you will notice we exported index with the method `home`, which is our actual route, and the attribute `ten`, for the purposes of this test. We check to see that `index.ten` is actually 10, as set in the route, and it is. As a quick aside on the naming of tests, you'll notice that test names should sound like a sentence when you prepend the test suite name. Our tests then read as "A test suite should pass", "A test suite should work asynchronously", and "index should have an attribute ten equal to 10". This leads to a general structure of unit tests with one test suite per module and one test per method within a module, sometimes with more than one assertion to test that method in the case where you want to try multiple inputs. Generally you would also match file structure, with one test suite per file and a directory structure mirroring your source code, although we did not do that here for brevity (theoretically the index tests should live in `tests/server/routes/index.js`).
+
+Those are the basics of mocha and chai, so now you can write server-side tests!
+
+##Client-Side Testing with Karma
+
+Client-side tests are a lot more complicated, since we need to run things in browsers, but thankfully, karma deals with most of that for us once we set up some configuration stuff. We also will not be going into much detail for client-side testing for now, beyond just setting it up and running trivial tests, since dealing with DOM manipulation gets complicated when you are used to rendering templates server-side and don't actually have a server to talk to. That said, don't worry if you are a little confused with this stuff.
+
+In terms of actually syntax of tests, everything should be identical since we are using mocha and chai still with karma. If you take a look at `tests/client/test.js`, you can see that we have the same tests as before (except for our server side route). We don't need to load chai this time, since karma will do that for us.
+
+What's different with karma is its configuration file, which you can find at `karma.conf.js`. Take a look inside- most of this is boilerplate, but we will highlight a few important things that you will want to know about. The most important attribute for our config object is `files`, which tells karma where are tests are and also where any client-side source files live. Note that you can include remote URLs here if you are using a CDN for something like JQuery.
+```
+files: [
+  'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js',
+  'public/javascripts/*.js',
+  'tests/client/*.js',
+],
+```
+tells karma to grab JQuery, anything in `public/javascripts` with a `.js` extention, and anything in `tests/client` or its subdirectories with a `.js` extension.
+
+`browsers` is also of note, as that tells karma which browser environments to run the tests in. `PhantomJS` is what we call a headless browser, essentially meaning it has all the browsery features like a DOM and being able to run javascript, but it doesn't have a GUI so it's good for running command line tests. Chrome is also supported by default, and other browsers have plugins.
+
+All the other options you can pretty much keep as-is, but if you want to read about them, check the [docs](http://karma-runner.github.io/0.8/config/configuration-file.html). 
+
+We can run our test suite with `./node_modules/karma/bin/karma start karma.conf.js`, similar to how we ran our mocha suite earlier. In addition to reporting the test results, since we set up the `coverage` reporter in our conf file, we also now have a `coverage` folder which contains code coverage data as html files. You can take a look at them, but they aren't very exciting since there's not actually any code in our `javascripts` directory to cover, but they take little effort to set up and when you are testing real code they are nice to have. 
+
 ##Running Tasks with `npm`
 
 We can configure `npm` to do quite a bit more than just manage packages. In your `package.json`, you can specify scripts that `npm` can then run.
@@ -80,6 +106,7 @@ hi
 ```
 
 Below is the `scripts` section from the in-class exercise `package.json` showing how we can use `npm` to run our unit tests. As you can see, you can even run `npm` tasks with `npm`!
+The `cover-mocha` script also shows how to generate server-side code coverage using Istanbul. It's just an extra simple command, and you can pretty much copy it to any new project. `test` is also a special npm keyword, so you can omit `run` and just run `npm test` to run all our tests. Try that now and take a look at Istanbul's coverage output for the server-side!
 
 ###### package.json
 ```
