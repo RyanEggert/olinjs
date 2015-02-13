@@ -18,14 +18,14 @@ describe("A test suite", function() {
 		expect(true).to.be.true; 
 	});
 
-	// Async
-	it('should work asyncronously', function(done) {
-		setTimeout(function() {
-			expect(true).to.be.true;
-			done();
-		}, 1000);
-	});
-});
+// 	// Async
+// 	it('should work asyncronously', function(done) {
+// 		setTimeout(function() {
+// 			expect(true).to.be.true;
+// 			done();
+// 		}, 1000);
+// 	});
+// });
 
 <<<<<<< HEAD
 describe("index", function() {
