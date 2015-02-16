@@ -86,7 +86,7 @@ div.cheep button{
 textarea{
   resize:none;
   height: 90%;
-  width:80%;
+  width:50%;
 }
 
 body {
@@ -97,9 +97,10 @@ body {
 
 button.send {
   display:inline-block;
-  width: 10%;
-  height: 80%;
-  font-size: 1.1vw;
+
+  height: 50px;
+  font-size: 4vmin;
+  width: auto;
 }
 
 /* resets */
