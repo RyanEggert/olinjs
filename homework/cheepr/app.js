@@ -9,7 +9,8 @@ var session = require('express-session');
 var mongoose = require("mongoose");
 
 // internal requirements
-var index = require("./routes/index");
+var cheeprs = require("./routes/cheepr");
+var users = require("./routes/users");
 
 // app creation & configuration
 var app = express();
@@ -36,15 +37,17 @@ app.use(session({
 }));
 
 // routes
-app.get('/', function(req, res) {
-  console.dir(req.session);
-  res.render('home');
-});
+app.get('/',cheeprs.home);
 
 app.get('/login', function(req, res) {
-  console.dir(req.cookies);
-  res.render('home');
+  res.render('login');
 });
+
+app.post('/users/simpleauth/', users.simplogin);
+app.post('/users/new/', users.new);
+app.post('/cheep/new/', cheeprs.new);
+
+
 
 // connections
 mongoose.connect(mongoURI);

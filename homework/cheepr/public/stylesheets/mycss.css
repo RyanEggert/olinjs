@@ -46,7 +46,7 @@ nav ul li a {
 
 
 div#mainpage {
-  width: 60%;
+  width: 75%;
   height: 80vh;
   background: aqua;
   margin: auto;
@@ -64,7 +64,7 @@ div#users {
   overflow-y:scroll;
   margin-left: 75%;
   height: 100%;
-  background: black;
+  background: rgb(230,230,230);
 }
 
 div.cheep{
@@ -82,12 +82,25 @@ div.cheep b{
 div.cheep button{
   float:right;
 }
+
+textarea{
+  resize:none;
+  height: 90%;
+  width:80%;
+}
+
 body {
   color: #292f36;
   font-family: 'share', helvetica;
   line-height: 1.1;
 }
 
+button.send {
+  display:inline-block;
+  width: 10%;
+  height: 80%;
+  font-size: 1.1vw;
+}
 
 /* resets */
 body { margin:0px; padding:0px; }
