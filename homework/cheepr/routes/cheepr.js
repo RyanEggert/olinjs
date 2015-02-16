@@ -43,7 +43,8 @@ cheeprroutes.home = home;
 
 // new cheep
 var makenewcheep = function(req, res) {
-  var in_text = req.body.in_cheep;
+  var in_text = req.body.words;
+  console.log(in_text)
   var in_name = req.session.user;
   //make new cheep in db
   var newCheep = new Cheep({
@@ -52,10 +53,9 @@ var makenewcheep = function(req, res) {
   });
   newCheep.save(function(err, newcheep) {
     if (err) {
-      res.status(500).send('Error creating new user');
+      res.status(500).send('Error creating new cheep');
     } else {
-      req.session.user = in_name;
-      res.send(newcheep);
+      res.render('cheep', {'layout':false, 'newcheep':newcheep});
     }
   });
 };

@@ -7,8 +7,8 @@
       <textarea name="in_cheep" id="in_cheep" placeholder="Say something cheep, {{currentuser}}..."></textarea>
       <button class="send" type="submit" id="cheepbutton">Cheep!</button>
     </form>
-
     </div>
+
     {{#each cheeps}}
     <div class="cheep" user="{{this.username}}" id="{{this._id}}">
       <b>{{this.username}} said... </b> <button type="button">Delete</button>
