@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 // routes
-app.get('/',cheeprs.home);
+app.get('/', cheeprs.home);
 
 app.get('/login', function(req, res) {
   res.render('login');
@@ -46,6 +46,7 @@ app.get('/login', function(req, res) {
 app.post('/users/simpleauth/', users.simplogin);
 app.post('/users/new/', users.new);
 app.post('/cheep/new/', cheeprs.new);
+app.delete('/cheep/delete/', cheeprs.delete);
 
 
 

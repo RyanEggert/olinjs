@@ -41,10 +41,9 @@ var home = function(req, res) {
 
 cheeprroutes.home = home;
 
-// new cheep
+// new cheep @ /cheep/new/
 var makenewcheep = function(req, res) {
   var in_text = req.body.words;
-  console.log(in_text)
   var in_name = req.session.user;
   //make new cheep in db
   var newCheep = new Cheep({
@@ -61,6 +60,18 @@ var makenewcheep = function(req, res) {
 };
 cheeprroutes.new = makenewcheep;
 
-
+// delete cheep @ /cheep/delete/
+var deletecheep  = function(req, res) {
+  Cheep.findOneAndRemove({
+    _id: req.body.orderid
+  }, function(err, data) {
+    if (err) {
+      res.status(500).send("Error removing cheep");
+    } else {
+      res.send(data);
+    }
+  });
+};
+cheeprroutes.delete = deletecheep;
 
 module.exports = cheeprroutes;

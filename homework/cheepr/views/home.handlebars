@@ -1,29 +1,29 @@
   {{> header}}
 
-<div id="mainpage">
-  <div id= "feed">
-    <div class = "cheep newcheep" user="{{currentuser}}">
-    <form id="newcheep">
-      <textarea name="in_cheep" id="in_cheep" placeholder="Say something cheep, {{currentuser}}..."></textarea>
-      <button class="send" type="submit" id="cheepbutton">Cheep!</button>
-    </form>
+  <div id="mainpage">
+    <div id= "feed">
+      <div class = "cheep newcheep" user="{{currentuser}}">
+        <form id="newcheep">
+          <textarea name="in_cheep" id="in_cheep" placeholder="Say something cheep, {{currentuser}}..." autofocus></textarea>
+          <button class="send" type="submit" id="cheepbutton">Cheep!</button>
+        </form>
+      </div>
+
+      {{#each cheeps}}
+      <div class="cheep" user="{{this.username}}" id="{{this._id}}">
+      <b>{{this.username}} said... </b> <button type="button" class="delete" id="{{this._id}}"user="{{this.username}}">Delete</button>
+        <p>{{this.words}}</p>
+      </div>
+      {{/each}}
     </div>
 
-    {{#each cheeps}}
-    <div class="cheep" user="{{this.username}}" id="{{this._id}}">
-      <b>{{this.username}} said... </b> <button type="button">Delete</button>
-      <p>{{this.words}}</p>
+    <div id="users">
+      {{#each users}}
+      <div class="user" user="{{this.username}}">
+        <b>{{this.username}}</b>
+      </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
 
-  <div id="users">
-  {{#each users}}
-  <div class="user" user="{{this.username}}">
-    <b>{{this.username}}</b>
   </div>
-  {{/each}}
-  </div>
-
-</div>
 
