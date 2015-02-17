@@ -1,8 +1,9 @@
 // Sample tests
 describe("A test suite", function() {
 	// Syncronous
-	it('should use expect syntax', function() { 
-		expect(true).to.be.true; 
+	it('should use expect syntax', function() {
+	it('should pass', function() {
+		expect(true).to.be.true;
 	});
 
 	// Async
@@ -12,4 +13,5 @@ describe("A test suite", function() {
 			done();
 		}, 1000);
 	});
+});
 });

@@ -1,0 +1,51 @@
+
+
+body{
+    background-color: #d3e9f5;
+    overflow-x:hidden;
+ }
+.textbutton {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+}
+.textbutton:hover:not([disabled]){
+    text-decoration: underline
+}
+
+.vertical-off {
+    min-height: 40vh;
+
+    display: flex;
+    align-items: center;
+}
+
+.mpage{
+    color: #000000
+}
+.mpage:hover{
+    text-decoration: none;
+}
+
+ul{
+    list-style: circle;
+}
+
+input.form-control{
+    text-align: right;
+}
+
+label.warning{
+    color: #CC0000;
+}
+
+div.sectionwrapper{
+    overflow-y:scroll;
+    height:600px;
+    overflow-x: hidden;
+}
+
+div.kitchenwrapper{
+    height:800px;
+}
