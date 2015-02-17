@@ -11,7 +11,7 @@ var $deletebuttons = $("button.delete");
 $newcheepin = $('form#newcheep');
 var currentuser = $('div.newcheep').attr("user");
 if (currentuser === "") {currentuser = "None";}
-
+console.log(currentuser);
 //Event Callback Funtions
 var shownewtweet = function(data, status) {
   $('div.newcheep').after(data);
@@ -31,7 +31,6 @@ var onError = function(data, status) {
 
 var deletehandler = function(event) {
   event.preventDefault();
-  console.log('delete click');
   orderid = $(this).attr('id'); //get order id to cancel
   $.ajax("/cheep/delete/", {
       type: "DELETE",
@@ -41,6 +40,17 @@ var deletehandler = function(event) {
     })
     .done(hideoldtweet)
     .error(onError);
+};
+
+var highlightcheeps = function(event) {
+  event.preventDefault();
+  // unhighlight other users
+  $("div#users div").css('background-color', 'transparent');
+  // highlight clicked user
+  $(this).css('background-color', 'yellow');
+  // unhighlight all cheeps
+  $("div.cheep").css('background-color', 'rgb(130, 150, 200)');
+  $("div.cheep[user="+$(this).attr('user')+"]").css('background-color', 'yellow');
 };
 
 // Page Functions
@@ -59,13 +69,23 @@ $newcheepin.submit(function(event) {
 
 $("div#feed").on("click", "button.delete", deletehandler);
 
+$("div#users").on("click", "div.usernamedisp", highlightcheeps);
+
 // User Functions
 
 // hide delete buttons
 var yourdeletebuttons = function(username) {
   var searchstring = "button.delete:not([user=" + username +"])";
-  // console.log(searchstring);
   $(searchstring).hide();
 };
 
+// hide cheep entry
+var canyoucheep = function(username) {
+  if (currentuser === "None") {
+    $("div.newcheep").remove();
+  }
+};
+
+
 yourdeletebuttons(currentuser);
+canyoucheep(currentuser);

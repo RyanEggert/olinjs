@@ -68,15 +68,11 @@ div#users {
 }
 
 div.cheep{
-  background: rgba(100, 150, 200, 100);
+  background: rgb(130, 150, 200);
   /*margin: 20px 0px;*/
   border-bottom: solid;
   border-bottom-width: 5px;
   padding: 5px;
-}
-
-div.cheep b{
-
 }
 
 div.cheep button{
@@ -101,6 +97,17 @@ button.send {
   height: 50px;
   font-size: 4vmin;
   width: auto;
+}
+
+div.usernamedisp {
+  cursor:pointer;
+  width: 60%
+}
+
+.highlight {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
 }
 
 /* resets */
