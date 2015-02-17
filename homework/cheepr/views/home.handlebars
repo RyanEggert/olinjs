@@ -5,13 +5,13 @@
       <div class = "cheep newcheep" user="{{currentuser}}">
         <form id="newcheep">
           <textarea name="in_cheep" id="in_cheep" placeholder="Say something cheep, {{currentuser}}..." autofocus></textarea>
-          <button class="send" type="submit" id="cheepbutton">Cheep!</button>
+          <div id="buttondiv"><button class="send" type="submit" id="cheepbutton">Cheep!</button></div>
         </form>
       </div>
 
       {{#each cheeps}}
       <div class="cheep highlight" user="{{this.username}}" id="{{this._id}}">
-      <b>{{this.username}} said... </b> <button type="button" class="delete" id="{{this._id}}"user="{{this.username}}">Delete</button>
+        <b>{{this.username}} said... </b> <button type="button" class="delete" id="{{this._id}}"user="{{this.username}}">Delete</button>
         <p>{{this.words}}</p>
       </div>
       {{/each}}
@@ -23,6 +23,9 @@
         <div class="usernamedisp" user="{{this.username}}"><b>{{this.username}}</b></div>
       </div>
       {{/each}}
+      <div class="user clhl" user="{{this.username}}">
+        <div id="clearuserhl" user="clearhighlight"><b>Clear Highlight</b></div>
+      </div>
     </div>
 
   </div>

@@ -4,7 +4,7 @@ var models = {};
 // user
 
 var userSchema = mongoose.Schema({
-username: String,
+  username: String,
 });
 
 models.User = mongoose.model("User", userSchema);
@@ -12,9 +12,12 @@ models.User = mongoose.model("User", userSchema);
 // cheep
 
 var cheepSchema = mongoose.Schema({
-username: String,
-words: String,
-date: { type: Date, default: Date.now }
+  username: String,
+  words: String,
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 models.Cheep = mongoose.model("Cheep", cheepSchema);
 

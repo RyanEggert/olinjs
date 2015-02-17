@@ -1,3 +1,6 @@
+//// CHEEPR ////
+// "Like twitter, but cheepr." //
+
 // external requirements
 var express = require("express");
 var path = require("path");
@@ -11,6 +14,7 @@ var mongoose = require("mongoose");
 // internal requirements
 var cheeprs = require("./routes/cheepr");
 var users = require("./routes/users");
+var authrs = require("./routes/auth");
 
 // app creation & configuration
 var app = express();
@@ -39,16 +43,13 @@ app.use(session({
 // routes
 app.get('/', cheeprs.home);
 
-app.get('/login', function(req, res) {
-  res.render('login');
-});
+app.get('/login', authrs.login);
+app.post('/logout', authrs.logout);
 
 app.post('/users/simpleauth/', users.simplogin);
 app.post('/users/new/', users.new);
 app.post('/cheep/new/', cheeprs.new);
 app.delete('/cheep/delete/', cheeprs.delete);
-
-
 
 // connections
 mongoose.connect(mongoURI);

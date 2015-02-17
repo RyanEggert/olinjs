@@ -54,14 +54,17 @@ var makenewcheep = function(req, res) {
     if (err) {
       res.status(500).send('Error creating new cheep');
     } else {
-      res.render('cheep', {'layout':false, 'newcheep':newcheep});
+      res.render('cheep', {
+        'layout': false,
+        'newcheep': newcheep
+      });
     }
   });
 };
 cheeprroutes.new = makenewcheep;
 
 // delete cheep @ /cheep/delete/
-var deletecheep  = function(req, res) {
+var deletecheep = function(req, res) {
   Cheep.findOneAndRemove({
     _id: req.body.orderid
   }, function(err, data) {
