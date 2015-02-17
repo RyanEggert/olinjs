@@ -1,0 +1,25 @@
+<h1><a href="/">Jessica's Burgers</h1></a>
+<div>
+  <!-- Page Name -->
+  <legend>Open Orders</legend>
+
+  <!-- Open Orders -->
+  <div class ="kitchenwrapper sectionwrapper">
+    <label class="col-md-4" for="toppings"></label>
+    <div class="col-md-4">
+      {{#each order}}
+      <div id={{this._id}}>
+        <h4>Order #<span class="orderindex">{{@index}}</span>:<button id={{this._id}} class="btn btn-danger btn-small cancelbut">Completed</button></h4>
+        <p>Placed at {{this.date}}</p>
+        <p><b>Toppings</b></p>
+        <ul>
+          {{#each this.toppings}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<!-- input list of orders -->
