@@ -1,5 +1,5 @@
 {
-  "name": "cheepr",
+  "name": "cheepr-premium",
   "version": "1.0.0",
   "description": "A trendy new social media sensation. \"cheepr: Like twitter, but cheepr.\"",
   "main": "app.js",
@@ -25,6 +25,8 @@
     "express-session": "^1.10.2",
     "express-sessions": "^1.0.5",
     "mongoose": "^3.8.23",
-    "morgan": "^1.5.1"
+    "morgan": "^1.5.1",
+    "passport": "^0.2.1",
+    "passport-facebook": "^1.0.3"
   }
 }
