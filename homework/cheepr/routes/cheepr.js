@@ -8,7 +8,6 @@ var cheeprroutes = {};
 
 // Main page
 var home = function(req, res) {
-  console.dir(req.session.user);
   // find users
   User.find({})
     .sort({
